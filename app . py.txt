@@ -1,0 +1,26 @@
+import streamlit as st
+
+st.set_page_config(page_title="App de Apuestas de Fútbol IA", layout="centered")
+
+st.title("⚽ Predicciones de Fútbol con IA")
+st.markdown("Ingresa los datos del partido para que el modelo analice el pronóstico.")
+
+with st.form("match_form"):
+    col1, col2 = st.columns(2)
+    with col1:
+        equipo_local = st.text_input("Equipo Local", "Real Madrid")
+    with col2:
+        equipo_visitante = st.text_input("Equipo Visitante", "Barcelona")
+        
+    stats_local = st.text_area("Estadísticas Equipo Local", "Últimos 5 partidos: 3 ganados, 1 empatado. Promedio de gol: 2.1")
+    stats_visitante = st.text_area("Estadísticas Equipo Visitante", "Últimos 5 partidos: 2 ganados, 2 empatados. Promedio de gol: 1.8")
+    
+    contexto_cualitativo = st.text_area("Noticias, Lesiones y Vestuario", "El local no tiene a su delantero estrella por lesión.")
+    
+    submitted = st.form_submit_button("Analizar Partido")
+
+if submitted:
+    with st.spinner("Analizando variables cuantitativas y cualitativas..."):
+        st.success("¡Análisis simulado con éxito!")
+        st.write(f"**Pronóstico preliminar para {equipo_local} vs {equipo_visitante}:**")
+        st.info("El sistema está funcionando a la perfección. En cuanto guardes el archivo y ejecutes el comando, se abrirá tu app en el navegador.")
