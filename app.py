@@ -2,8 +2,8 @@ import streamlit as st
 import google.generativeai as genai
 from datetime import date
 
-# Ingresa tu clave API oficial de Google AI Studio (empieza por AIza...)
-API_KEY = "PEGA_AQUÍ_TU_API_KEY"
+# Tu clave API integrada y lista para funcionar
+API_KEY = "AIzaSyDiRWvlNfprWfL-6KECFTraUFXB94Wkupo"
 genai.configure(api_key=API_KEY)
 
 st.set_page_config(page_title="Apuestas Claras y Rápidas", layout="centered")
@@ -30,7 +30,6 @@ with st.form("match_form"):
 if submitted:
     with st.spinner("Calculando pronóstico directo..."):
         try:
-            # Usamos el modelo optimizado y rápido
             model = genai.GenerativeModel('gemini-2.5-flash')
             
             prompt = f"""
@@ -49,12 +48,11 @@ if submitted:
             🎯 **Apuesta Recomendada:** [Una sola recomendación contundente y clara]
             """
             
-            # Forzamos una respuesta rápida con un límite de seguridad
-            response = model.generate_content(prompt, request_options={'timeout': 10})
+            response = model.generate_content(prompt)
             
             st.success("¡Análisis listo!")
             st.subheader(f"Resumen para: {equipo_local} vs {equipo_visitante} ({fecha_partido})")
             st.markdown(response.text)
             
         except Exception as e:
-            st.error(f"Ocurrió un error al conectar con la IA o tardó demasiado. Detalle: {e}")
+            st.error(f"Ocurrió un error al conectar con la IA. Detalle: {e}")
