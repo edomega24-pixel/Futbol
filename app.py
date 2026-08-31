@@ -2,7 +2,6 @@ import streamlit as st
 import google.generativeai as genai
 from datetime import date
 
-# Tu clave API integrada y lista para funcionar
 API_KEY = "AIzaSyDiRWvlNfprWfL-6KECFTraUFXB94Wkupo"
 genai.configure(api_key=API_KEY)
 
@@ -30,7 +29,7 @@ with st.form("match_form"):
 if submitted:
     with st.spinner("Calculando pronóstico directo..."):
         try:
-            model = genai.GenerativeModel('gemini-2.5-flash')
+            model = genai.GenerativeModel('gemini-3.6-flash')
             
             prompt = f"""
             Actúa como un tipster profesional de apuestas de fútbol ultra directo. 
