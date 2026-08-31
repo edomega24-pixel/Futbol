@@ -2,7 +2,8 @@ import streamlit as st
 import google.generativeai as genai
 from datetime import date
 
-API_KEY = "AQ.Ab8RN6KNMgfDPh8Zn6qzo-JY7kQPmKn_1gH5JhOEzeiRaAnGJg"
+# Pega aquí tu clave API oficial de Google AI Studio (empieza por AIza...)
+API_KEY = "PEGA_AQUÍ_TU_API_KEY_NUEVA"
 genai.configure(api_key=API_KEY)
 
 st.set_page_config(page_title="Apuestas Claras y Rápidas", layout="centered")
@@ -29,7 +30,7 @@ with st.form("match_form"):
 if submitted:
     with st.spinner("Calculando pronóstico directo..."):
         try:
-            model = genai.GenerativeModel('gemini-3.6-flash')
+            model = genai.GenerativeModel('gemini-1.5-flash')
             
             prompt = f"""
             Actúa como un tipster profesional de apuestas de fútbol ultra directo. 
