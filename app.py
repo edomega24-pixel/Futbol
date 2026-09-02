@@ -2,7 +2,7 @@ import streamlit as st
 from google import genai
 from datetime import date
 
-client = genai.Client(api_key="AQ.Ab8RN6KujP4ma5SacCmWm009IJF32R7e3oKpXK3fhGZjxn6XZA")
+client = genai.Client(api_key="AIzaSyDiRWvlNfprWfL-6KECFTraUFXB94Wkupo")
 
 st.set_page_config(page_title="Apuestas Claras y Rápidas", layout="centered")
 
