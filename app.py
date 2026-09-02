@@ -1,10 +1,9 @@
 import streamlit as st
-import google.generativeai as genai
+from google import genai
 from datetime import date
 
-# Clave API integrada directamente
-API_KEY = "AQ.Ab8RN6KujP4ma5SacCmWm009IJF32R7e3oKpXK3fhGZjxn6XZA"
-genai.configure(api_key=API_KEY)
+# Configuración limpia con el nuevo cliente oficial
+client = genai.Client(api_key="AQ.Ab8RN6KujP4ma5SacCmWm009IJF32R7e3oKpXK3fhGZjxn6XZA")
 
 st.set_page_config(page_title="Apuestas Claras y Rápidas", layout="centered")
 
@@ -30,8 +29,6 @@ with st.form("match_form"):
 if submitted:
     with st.spinner("Calculando pronóstico directo..."):
         try:
-            model = genai.GenerativeModel('gemini-3.6-flash')
-            
             prompt = f"""
             Actúa como un tipster profesional de apuestas de fútbol ultra directo. 
             Analiza el partido del día {fecha_partido} entre {equipo_local} (Local) y {equipo_visitante} (Visitante).
@@ -48,7 +45,10 @@ if submitted:
             🎯 **Apuesta Recomendada:** [Una sola recomendación contundente y clara]
             """
             
-            response = model.generate_content(prompt)
+            response = client.models.generate_content(
+                model='gemini-2.5-flash',
+                contents=prompt,
+            )
             
             st.success("¡Análisis listo!")
             st.subheader(f"Resumen para: {equipo_local} vs {equipo_visitante} ({fecha_partido})")
