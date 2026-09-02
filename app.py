@@ -1,9 +1,10 @@
 import streamlit as st
-from google import genai
+import requests
+import json
 from datetime import date
 
-# Configuración con la nueva clave provista
-client = genai.Client(api_key="AQ.Ab8RN6KQjG98rDHVXz-qCGRG4zyfnMXvUecDhn2Rtv9F1wxcdw")
+# Configuración de tu clave actual
+API_KEY = "AQ.Ab8RN6KQjG98rDHVXz-qCGRG4zyfnMXvUecDhn2Rtv9F1wxcdw"
 
 st.set_page_config(page_title="Apuestas Claras y Rápidas", layout="centered")
 
@@ -45,14 +46,31 @@ if submitted:
             🎯 **Apuesta Recomendada:** [Una sola recomendación contundente y clara]
             """
             
-            response = client.models.generate_content(
-                model='gemini-3.6-flash',
-                contents=prompt,
-            )
+            # URL del endpoint oficial de Gemini para gemini-3.6-flash
+            url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key={API_KEY}"
             
-            st.success("¡Análisis listo!")
-            st.subheader(f"Resumen para: {equipo_local} vs {equipo_visitante} ({fecha_partido})")
-            st.markdown(response.text)
+            headers = {
+                'Content-Type': 'application/json'
+            }
             
+            payload = {
+                "contents": [{
+                    "parts": [{"text": prompt}]
+                }]
+            }
+            
+            # Petición HTTP directa que salta cualquier restricción del SDK
+            response = requests.post(url, headers=headers, data=json.dumps(payload))
+            result = response.json()
+            
+            if response.status_code == 200:
+                # Extraer el texto de la respuesta estructurada de la API
+                texto_respuesta = result["candidates"][0]["content"]["parts"][0]["text"]
+                st.success("¡Análisis listo!")
+                st.subheader(f"Resumen para: {equipo_local} vs {equipo_visitante} ({fecha_partido})")
+                st.markdown(texto_respuesta)
+            else:
+                st.error(f"Error de la API ({response.status_code}): {result}")
+                
         except Exception as e:
-            st.error(f"Ocurrió un error al conectar con la IA. Detalle: {e}")
+            st.error(f"Ocurrió un error al procesar la solicitud: {e}")
