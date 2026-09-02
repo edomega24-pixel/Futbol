@@ -2,7 +2,7 @@ import streamlit as st
 import google.generativeai as genai
 from datetime import date
 
-API_KEY = "AIzaSyDiRWvlNfprWfL-6KECFTraUFXB94Wkupo"
+API_KEY = "AQ.Ab8RN6KujP4ma5SacCmWm009IJF32R7e3oKpXK3fhGZjxn6XZA"
 genai.configure(api_key=API_KEY)
 
 st.set_page_config(page_title="Apuestas Claras y Rápidas", layout="centered")
