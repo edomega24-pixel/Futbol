@@ -2,8 +2,8 @@ import streamlit as st
 import google.generativeai as genai
 from datetime import date
 
-API_KEY = "AQ.Ab8RN6KujP4ma5SacCmWm009IJF32R7e3oKpXK3fhGZjxn6XZA"
-genai.configure(api_key=API_KEY)
+# Lee la clave de forma segura desde la configuración de la nube (Secrets)
+genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
 
 st.set_page_config(page_title="Apuestas Claras y Rápidas", layout="centered")
 
