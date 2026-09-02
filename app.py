@@ -2,8 +2,8 @@ import streamlit as st
 from google import genai
 from datetime import date
 
-# Cliente configurado con la clave directa
-client = genai.Client(api_key="AQ.Ab8RN6KujP4ma5SacCmWm009IJF32R7e3oKpXK3fhGZjxn6XZA")
+# Configuración con la nueva clave provista
+client = genai.Client(api_key="AQ.Ab8RN6KQjG98rDHVXz-qCGRG4zyfnMXvUecDhn2Rtv9F1wxcdw")
 
 st.set_page_config(page_title="Apuestas Claras y Rápidas", layout="centered")
 
