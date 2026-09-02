@@ -2,7 +2,8 @@ import streamlit as st
 from google import genai
 from datetime import date
 
-client = genai.Client(api_key="AIzaSyDiRWvlNfprWfL-6KECFTraUFXB94Wkupo")
+# Lee la clave de forma segura desde los Secrets de Streamlit
+client = genai.Client(api_key=st.secrets["AQ.Ab8RN6KujP4ma5SacCmWm009IJF32R7e3oKpXK3fhGZjxn6XZA"])
 
 st.set_page_config(page_title="Apuestas Claras y Rápidas", layout="centered")
 
@@ -36,7 +37,7 @@ if submitted:
             - Visitante: {stats_visitante}
             - Contexto: {contexto}
             
-            NO redactes textos largos ni explicaciones técnicas complejas. Entrega la respuesta exactamente bajo este formato resumido:
+            NO redactes textos largos ni explicaciones técnicas complejas. Entrega the respuesta exactamente bajo este formato resumido:
             
             🏆 **Ganador Probable:** [Indica quién gana o si hay alta probabilidad de empate]
             📊 **Probabilidades:** [Local X% - Empate X% - Visitante X%]
@@ -45,7 +46,7 @@ if submitted:
             """
             
             response = client.models.generate_content(
-                model='gemini-2.5-flash',
+                model='gemini-3.6-flash',
                 contents=prompt,
             )
             
